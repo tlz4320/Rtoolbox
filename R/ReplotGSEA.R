@@ -9,7 +9,7 @@
 ## metric.range: the range of the metric; defaults to [min(DEFINED RANGE), max(DEFINED RANGE)]
 ## enrichment.score.range: the range of the enrichment score; defaults to [min(ENRICHMENT SCORE), max(ENRICHMENT SCORE)]
 
-replotGSEA <- function(path, gene.set, class.name, metric.range,
+replotGSEA <- function(path, gene.set, class.name, metric.range, left.name="Positive", right.name="Negative",
                        enrichment.score.range) {
   
   if (missing(path)) {
@@ -158,8 +158,8 @@ replotGSEA <- function(path, gene.set, class.name, metric.range,
   box()
   text(length(gsea.rnk$metric) / 2, 0.7,
        labels = ifelse(!missing(class.name), class.name, gsea.template))
-  text(length(gsea.rnk$metric) * 0.01, 0.7, "Positive", adj = c(0, NA))
-  text(length(gsea.rnk$metric) * 0.99, 0.7, "Negative", adj = c(1, NA))
+  text(length(gsea.rnk$metric) * 0.01, 0.7, left.name, adj = c(0, NA))
+  text(length(gsea.rnk$metric) * 0.99, 0.7, right.name, adj = c(1, NA))
   
   par(mar = c(5, 5, 0, 2))
   rank.metric <- rle(round(gsea.rnk$metric, digits = 2))
